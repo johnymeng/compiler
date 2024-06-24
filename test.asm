@@ -1,4 +1,6 @@
 global _start
 
 _start:
-    ret 
+    mov rax, 60
+    mov rdi, 0
+    syscall
