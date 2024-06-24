@@ -1,3 +1,6 @@
+#[[make file using cmake -S . -B build/]]
+#[[then run cmake --build build/]]
+#[[then ./build/yui]]
 cmake_minimum_required(VERSION 3.20)
 
 project(yui)
