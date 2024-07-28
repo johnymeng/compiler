@@ -154,4 +154,10 @@ CMakeFiles/yui.dir/src/main.cpp.o: \
  /usr/include/c++/14.1.1/bits/stl_uninitialized.h \
  /usr/include/c++/14.1.1/bits/stl_vector.h \
  /usr/include/c++/14.1.1/bits/stl_bvector.h \
- /usr/include/c++/14.1.1/bits/vector.tcc
+ /usr/include/c++/14.1.1/bits/vector.tcc \
+ /home/jm/vscode/C++/compiler/yui/src/tokenization.hpp \
+ /home/jm/vscode/C++/compiler/yui/src/parser.hpp \
+ /usr/include/c++/14.1.1/cassert /usr/include/assert.h \
+ /usr/include/c++/14.1.1/variant \
+ /usr/include/c++/14.1.1/bits/parse_numbers.h \
+ /home/jm/vscode/C++/compiler/yui/src/generation.hpp

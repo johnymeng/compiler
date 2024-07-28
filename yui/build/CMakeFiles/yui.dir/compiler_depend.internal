@@ -3,10 +3,14 @@
 
 CMakeFiles/yui.dir/src/main.cpp.o
  /home/jm/vscode/C++/compiler/yui/src/main.cpp
+ /home/jm/vscode/C++/compiler/yui/src/generation.hpp
+ /home/jm/vscode/C++/compiler/yui/src/parser.hpp
+ /home/jm/vscode/C++/compiler/yui/src/tokenization.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h
  /usr/include/asm/errno.h
+ /usr/include/assert.h
  /usr/include/bits/atomic_wide_counter.h
  /usr/include/bits/byteswap.h
  /usr/include/bits/cpu-set.h
@@ -106,6 +110,7 @@ CMakeFiles/yui.dir/src/main.cpp.o
  /usr/include/c++/14.1.1/bits/new_allocator.h
  /usr/include/c++/14.1.1/bits/ostream.tcc
  /usr/include/c++/14.1.1/bits/ostream_insert.h
+ /usr/include/c++/14.1.1/bits/parse_numbers.h
  /usr/include/c++/14.1.1/bits/postypes.h
  /usr/include/c++/14.1.1/bits/predefined_ops.h
  /usr/include/c++/14.1.1/bits/ptr_traits.h
@@ -136,6 +141,7 @@ CMakeFiles/yui.dir/src/main.cpp.o
  /usr/include/c++/14.1.1/bits/utility.h
  /usr/include/c++/14.1.1/bits/vector.tcc
  /usr/include/c++/14.1.1/bits/version.h
+ /usr/include/c++/14.1.1/cassert
  /usr/include/c++/14.1.1/cctype
  /usr/include/c++/14.1.1/cerrno
  /usr/include/c++/14.1.1/clocale
@@ -174,6 +180,7 @@ CMakeFiles/yui.dir/src/main.cpp.o
  /usr/include/c++/14.1.1/tuple
  /usr/include/c++/14.1.1/type_traits
  /usr/include/c++/14.1.1/typeinfo
+ /usr/include/c++/14.1.1/variant
  /usr/include/c++/14.1.1/vector
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/basic_file.h

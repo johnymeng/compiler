@@ -1,107 +1,58 @@
+/*---------------STANDARD LIBRARY---------------*/
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <optional>
 #include <vector>
+#include <cstddef>
 
-enum class TokenType
-{
-    _return,
-    int_lit,
-    semi
-};
+/*---------------HEADER FILES---------------*/
+#include "tokenization.hpp"
+#include "parser.hpp"
+#include "generation.hpp"
 
-struct Token
-{
-    TokenType type;
-    std::optional<std::string> value {};
-};
+// enum class TokenType
+// {
+//     exit,
+//     int_lit,
+//     semi
+// };
 
-//turns file into tokens 
-std::vector<Token> tokenize(const std::string& str)
-{
-    std::vector<Token> tokens;
+// struct Token
+// {
+//     TokenType type;
+//     std::optional<std::string> value {};
+// };
 
-    std::string buf;
-    for(int i = 0; i < str.length(); i++)
-    {
-        char c = str[i];
-        if(std::isalpha(c))
-        {
-            buf.push_back(c);
-            i++;
-            while(std::isalnum(str[i]))
-            {
-                buf.push_back(str[i]);
-                i++;
-            }
-            i--;
+// //turns file into tokens 
+// std::vector<Token> tokenize(const std::string& str)
+// {
+    
+// }
 
-            if(buf == "return")
-            {
-                tokens.push_back({.type = TokenType::_return});
-                buf.clear();
-                continue;
-            }
-            else
-            {
-                std::cerr << "A Yahamistake was Made!" << std::endl;
-                exit(EXIT_FAILURE);
-            }
-        }
-        else if(std::isdigit(c))
-        {
-            buf.push_back(c);
+// std::string tokens_to_asm(const std::vector<Token> &tokens)
+// {
+//     std::stringstream output;
+//     output << "global _start\n _start:\n";
+//     for(int i = 0; i < tokens.size(); i++)
+//     {
+//         const Token& token = tokens[i];
 
-            while(std::isdigit(str[i]))
-            {
-                buf.push_back(str[i]);
-                i++;
-            }
-            i--;
-            tokens.push_back({.type = TokenType::int_lit, .value = buf});
-            buf.clear();
-        }
-        else if(c == ';')
-        {
-            tokens.push_back({.type = TokenType::semi});
-        }
-        else if(std::isspace(c))
-        {
-            continue;
-        }
-        else
-        {
-            std::cerr << "A Yahamistake was Made!" << std::endl;
-            exit(EXIT_FAILURE);
-        }
-    }
-    return tokens;
-}
-
-std::string tokens_to_asm(const std::vector<Token> &tokens)
-{
-    std::stringstream output;
-    output << "global _start\n _start:\n";
-    for(int i = 0; i < tokens.size(); i++)
-    {
-        const Token& token = tokens[i];
-
-        if(token.type == TokenType::_return)
-        {
-            if(i + 1 < tokens.size() && tokens[i+1].type == TokenType::int_lit)
-            {
-                if(i + 2 < tokens.size() && tokens[i+2].type == TokenType::semi)
-                {
-                    output << "    mov rax, 60\n";
-                    output << "    mov rdi, " << tokens[i+1].value.value() << "\n";
-                    output << "    syscall";
-                }
-            }
-        }
-    }
-    return output.str();
-}
+//         if(token.type == TokenType::exit)
+//         {
+//             if(i + 1 < tokens.size() && tokens[i+1].type == TokenType::int_lit)
+//             {
+//                 if(i + 2 < tokens.size() && tokens[i+2].type == TokenType::semi)
+//                 {
+//                     output << "    mov rax, 60\n";
+//                     output << "    mov rdi, " << tokens[i+1].value.value() << "\n";
+//                     output << "    syscall";
+//                 }
+//             }
+//         }
+//     }
+//     return output.str();
+// }
 
 //count of arguments, string of arguments
 int main(int argc, char* argv[])
@@ -166,11 +117,23 @@ int main(int argc, char* argv[])
 
     std::cout<< contents <<std::endl;
 
-    std::vector<Token> tokens = tokenize(contents);
+    Tokenizer tokenizer(std::move(contents));
+    std::vector<Token> tokens = tokenizer.tokenize();
 
+
+    Parser parser(std::move(tokens));
+    std::optional<NodeExit> tree = parser.parse();
+
+    if(!tree.has_value())
     {
-        std::fstream file("../yui/out.asm", std::ios::out);
-        file << tokens_to_asm(tokens);
+        std::cerr << "No Exit statement found" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    Generator generator(tree.value());
+    {
+        std::fstream file("out.asm", std::ios::out);
+        file << generator.generate();
     }
 
     system("nasm -felf64 out.asm");
