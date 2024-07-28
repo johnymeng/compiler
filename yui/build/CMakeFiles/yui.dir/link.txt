@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/yui.dir/src/main.cpp.o -o yui 
+/usr/bin/c++ CMakeFiles/yui.dir/src/main.cpp.o -o yui

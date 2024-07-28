@@ -152,7 +152,7 @@ int main(int argc, char* argv[])
 
         std::cerr<<"Oh no, there's an error! Yahasorry, that's the wrong usage! The correct usage is..."<<std::endl;
         std::cerr<<"Correct Usage: yui <yaha-input.yui>"<<std::endl;
-        
+
         return EXIT_FAILURE;
     }
 
@@ -175,6 +175,6 @@ int main(int argc, char* argv[])
 
     system("nasm -felf64 out.asm");
     system("ld -o out out.o");
-
+    
     return EXIT_SUCCESS;
 }
